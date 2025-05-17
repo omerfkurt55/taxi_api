@@ -16,6 +16,11 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
+from .models import User
+
+def get_user(db: Session, username: str):
+    return db.query(User).filter(User.username == username).first()
+
 def create_trip(db: Session, trip: schemas.TaxiTripCreate):
     # Row ID oluştur (eğer sağlanmamışsa)
     if not trip.row_id:
